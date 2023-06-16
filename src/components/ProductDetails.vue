@@ -8,45 +8,43 @@
 
   const props = defineProps<ProductDetailProps>();
 
-  // const product = ref<ProductItem>({});
-  //
-  // props.product.then( p => product.value = p)
 
 </script>
 
 <template>
   <div class="product-details">
 
-    <div>Product Details</div>
+    <div class="text-center pb-1 border-b border-dashed text-xl font-semibold">Product Details</div>
 
-    <div>
-      <span>Name: </span>
-      <span>{{ props.product?.title}}</span>
+    <div class="my-5">
+
+
+      <div class="text-xl">
+        <span>Name: </span>
+        <span class="font-semibold">{{ props.product?.title}}</span>
+      </div>
+
+      <div>
+        <span>Price: </span>
+        <span>{{ props.product?.price}}</span>
+      </div>
+
+      <div>
+        <span>Rating: </span>
+        <span>{{ props.product?.rating}}</span>
+      </div>
+
+      <div class="mt-2">
+        <span>Description: </span>
+        <span class="text-sky-800">{{ props.product?.description}}</span>
+      </div>
     </div>
-
-    <div>
-      <span>Price: </span>
-      <span>{{ props.product?.price}}</span>
-    </div>
-
-    <div>
-      <span>Rating: </span>
-      <span>{{ props.product?.rating}}</span>
-    </div>
-
-    <div>
-      <span>Description: </span>
-      <span>{{ props.product?.description}}</span>
-    </div>
-
 
   </div>
 </template>
 
 <style scoped>
   .product-details {
-    border: 1px solid #c1c1c1;
-    padding: 1rem;
-    border-radius: 2rem;
+    @apply border p-4 rounded-3xl shadow
   }
 </style>
