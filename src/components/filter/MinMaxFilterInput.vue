@@ -2,13 +2,14 @@
 import {defineEmits, defineProps, ref, watch} from "vue";
 
 
-  interface MinMaxInputInterface {
+  interface MinMaxPropsInterface {
     label: string;
     min:number,
     max:number,
+    incrementBy:number
   }
 
-  const props = defineProps<MinMaxInputInterface>();
+  const props = defineProps<MinMaxPropsInterface>();
 
   const emit = defineEmits<{
     (e: 'update:min', value: number): void
@@ -25,8 +26,8 @@ import {defineEmits, defineProps, ref, watch} from "vue";
   watch(
       () => [input_min.value, input_max.value],
     (minMax) =>{
-        emit('update:min', minMax[0])
-        emit('update:max', minMax[1])
+        emit('update:min', Number(minMax[0]))
+        emit('update:max', Number(minMax[1]))
     }
   )
 
@@ -43,9 +44,7 @@ import {defineEmits, defineProps, ref, watch} from "vue";
 <template>
   <div>
 
-    <label class="block">
-      {{props.label}}
-    </label>
+    <label class="block">{{props.label}}</label>
 
     <div class="filter-inputs">
 
@@ -53,18 +52,40 @@ import {defineEmits, defineProps, ref, watch} from "vue";
 
         <div class="min-text-box min-text-box-min">
           <label>Min</label>
-          <input type="number" :min="slider_min" :max="slider_max"  step="0.1" v-model="input_min" class="w-16 text-sm border text-right">
+          <input type="number" :min="slider_min"
+                 :max="slider_max"
+                 :step="props.incrementBy ||0.1"
+                 v-model="input_min"
+                 class="w-16 text-sm border text-right"
+          >
         </div>
 
-        <input type="range" :min="slider_min" :max="slider_max" step="0.1" v-model="input_min">
+        <input type="range"
+               :min="slider_min"
+               :max="slider_max"
+               :step="props.incrementBy ||0.1"
+               v-model="input_min"
+        >
       </div>
 
       <div class="flex gap-1">
-        <input type="range" :min="slider_min" :max="slider_max" step="0.1" v-model="input_max">
+        <input type="range"
+               :min="slider_min"
+               :max="slider_max"
+               :step="props.incrementBy ||0.1"
+               v-model="input_max"
+        >
         <div class="min-text-box min-text-box-max">
-            <label>Max</label>
-          <input type="number" :min="slider_min" :max="slider_max" step="0.1" v-model="input_max" class="w-16 text-sm border">
+          <label>Max</label>
+          <input type="number"
+                 :min="slider_min"
+                 :max="slider_max"
+                 :step="props.incrementBy ||0.1"
+                 v-model="input_max"
+                 class="w-16 text-sm border"
+          >
         </div>
+
       </div>
 
     </div>

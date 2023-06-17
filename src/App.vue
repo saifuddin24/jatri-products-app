@@ -1,52 +1,30 @@
 <script setup lang="ts">
-  import ProductTable from './components/ProductsTable.vue'
-  import MinMaxFilterInput from "@/components/MinMaxFilterInput.vue";
   import {ref} from "vue";
-  import {FilterInterface, MinMaxInterface} from "@/components/filter-interfaces";
 
-  const ratingFilter = ref<FilterInterface<MinMaxInterface>>(
-    {
-      key:'rating',
-      value:{ min:0, max: 5}
-    }
-  );
+  import ProductTable from './components/products/ProductsTable.vue'
+  import {FilterInterface, MinMaxInterface} from "@/components/filter/filter-interfaces";
+  import ProductFiltering from "@/components/products/ProductFiltering.vue";
 
-  const priceFilter = ref<FilterInterface<MinMaxInterface>>(
-    {
-      key:'price',
-      value:{ min:0, max: 10000}
-    }
-  );
+
+  const filters = ref<FilterInterface<MinMaxInterface>[]>([]);
+
+  function update_filters(filter_values){
+    filters.value = filter_values;
+  }
 
 </script>
 
 <template>
   <div>
-
     <div class="header">
-
       <h2 class="title">Products List</h2>
-
-      <div class="filters">
-
-        <min-max-filter-input
-            v-model:min="ratingFilter.value.min"
-            v-model:max="ratingFilter.value.max"
-            label="Rating"
-        >
-        </min-max-filter-input>
-        <min-max-filter-input
-            v-model:min="priceFilter.value.min"
-            v-model:max="priceFilter.value.max"
-            label="Price Range"
-        >
-        </min-max-filter-input>
-
-      </div>
-
+      <product-filtering
+          class="filters"
+          @filters:update="update_filters"
+      ></product-filtering>
     </div>
 
-    <product-table :filters="[ratingFilter,priceFilter]"></product-table>
+    <product-table :filters="filters"></product-table>
   </div>
 </template>
 

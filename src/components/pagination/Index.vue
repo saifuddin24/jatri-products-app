@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import {computed, defineEmits, defineExpose, defineProps, ref, watch} from "vue";
 
-  interface PaginationInterface {
+  interface PaginationPropsInterface {
     modelValue: number;
     itemsPerPage: number;
     totalPages: number;
@@ -9,7 +9,7 @@
     totalItems: number
   }
 
-  const props = defineProps<PaginationInterface>();
+  const props = defineProps<PaginationPropsInterface>();
 
   const emit = defineEmits<{
     (e:'update:modelValue', value:number):void

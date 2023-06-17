@@ -1,33 +1,47 @@
 <script setup lang="ts">
 
-  import {defineEmits, defineProps, ref} from "vue";
+import {computed, defineEmits, defineProps, ref} from "vue";
   import ProductItem from "@/types/ProductItem";
 
-  const emit = defineEmits<({e:'click:detail', type:number})>();
+  const emits = defineEmits<{(e:'click:detail', value:number):void }>();
 
   interface PropsInterface {
     product: ProductItem;
     serial:number;
     detailsShowing: boolean;
+    page: number,
+    perPage: number,
   }
 
   const props = defineProps<PropsInterface>();
 
   const detailsShown = ref<boolean>(false);
+  const loading = ref<boolean>(false);
+
+  const serial = computed<number>(() =>{
+    if(props.page > 1) {
+      return ((props.page -1) * props.perPage) + (props.serial);
+    }
+    return props.serial;
+  })
+
+  function onClickDetail(){
+    emits('click:detail', props.product.id );
+  }
 
 </script>
 
 <template>
   <tr class="row">
-    <td class="serial">{{props.serial}}</td>
-    <td class="title">{{ props.product.title }} {{props.product.id}}</td>
+    <td class="serial">{{ serial }}</td>
+    <td class="title">{{ props.product.title }}</td>
     <td class="rating">{{props.product.rating}}</td>
     <td class="price">{{props.product.price}}</td>
     <td class="action">
       <button
           class="btn"
           :class="props.detailsShowing ? 'btn-secondary':'btn-primary'"
-          @click.prevent="emit('click:detail', props.product.id )">
+          @click.prevent="onClickDetail">
         {{ props.detailsShowing ? "Close":"Show" }}
       </button>
     </td>
@@ -42,7 +56,7 @@
 </template>
 
 <style scoped>
-  .price, .rating {
+  .price, .rating, .serial {
     @apply text-center
   }
 
