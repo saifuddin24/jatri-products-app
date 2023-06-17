@@ -22,7 +22,12 @@ a,
   }
 }
 
-@media (min-width: 1024px) {
+@media (max-width: 1024px) {
+  #app {
+    max-width: 992px;
+    font-weight: normal;
+    @apply mx-auto my-0 p-8
+  }
 
 }
 

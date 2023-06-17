@@ -65,16 +65,20 @@ import {defineEmits, defineProps, ref, watch} from "vue";
                :max="slider_max"
                :step="props.incrementBy ||0.1"
                v-model="input_min"
+               class="range-slider"
         >
       </div>
 
       <div class="flex gap-1">
+
         <input type="range"
                :min="slider_min"
                :max="slider_max"
                :step="props.incrementBy ||0.1"
                v-model="input_max"
+               class="range-slider"
         >
+
         <div class="min-text-box min-text-box-max">
           <label>Max</label>
           <input type="number"
@@ -110,5 +114,6 @@ import {defineEmits, defineProps, ref, watch} from "vue";
   .min-text-box.min-text-box-min {
     @apply text-right
   }
+
 
 </style>
