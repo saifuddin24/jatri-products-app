@@ -38,6 +38,6 @@
   }
 
   .filters {
-    @apply flex flex-col md:flex-row justify-center gap-3 md:gap-2
+    @apply flex flex-col sm:flex-row justify-center gap-3 md:gap-2
   }
 </style>

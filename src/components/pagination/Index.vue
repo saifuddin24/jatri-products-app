@@ -169,7 +169,7 @@
   }
 
   ul li.prev {
-    @apply mx-1
+    @apply sm:mx-1
   }
 
   ul li.prev a,
@@ -178,7 +178,7 @@
   }
 
   ul li.next {
-    @apply mx-1
+    @apply sm:mx-1
   }
 
   ul li.active a {

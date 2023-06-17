@@ -48,7 +48,7 @@ import {defineEmits, defineProps, ref, watch} from "vue";
 
     <div class="filter-inputs">
 
-      <div class="flex gap-1">
+      <div class="flex gap-1 flex-col">
 
         <div class="min-text-box min-text-box-min">
           <label>Min</label>
@@ -56,7 +56,7 @@ import {defineEmits, defineProps, ref, watch} from "vue";
                  :max="slider_max"
                  :step="props.incrementBy ||0.1"
                  v-model="input_min"
-                 class="w-16 text-sm border text-right"
+                 class="w-16 text-sm border"
           >
         </div>
 
@@ -69,15 +69,8 @@ import {defineEmits, defineProps, ref, watch} from "vue";
         >
       </div>
 
-      <div class="flex gap-1">
+      <div class="flex gap-1 flex-col">
 
-        <input type="range"
-               :min="slider_min"
-               :max="slider_max"
-               :step="props.incrementBy ||0.1"
-               v-model="input_max"
-               class="range-slider"
-        >
 
         <div class="min-text-box min-text-box-max">
           <label>Max</label>
@@ -90,6 +83,13 @@ import {defineEmits, defineProps, ref, watch} from "vue";
           >
         </div>
 
+        <input type="range"
+               :min="slider_min"
+               :max="slider_max"
+               :step="props.incrementBy ||0.1"
+               v-model="input_max"
+               class="range-slider"
+        >
       </div>
 
     </div>
@@ -100,7 +100,7 @@ import {defineEmits, defineProps, ref, watch} from "vue";
 <style scoped>
 
   .filter-inputs {
-    @apply flex gap-3 items-end border p-2 bg-gray-100 rounded shadow
+    @apply flex gap-3   border p-2 bg-gray-100 rounded shadow
   }
 
   .min-text-box {
@@ -112,7 +112,7 @@ import {defineEmits, defineProps, ref, watch} from "vue";
   }
 
   .min-text-box.min-text-box-min {
-    @apply text-right
+
   }
 
 

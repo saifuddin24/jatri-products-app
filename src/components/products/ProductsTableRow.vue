@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import {computed, defineEmits, defineProps, ref} from "vue";
+  import {computed, defineEmits, defineProps, ref} from "vue";
   import ProductItem from "@/types/ProductItem";
 
   const emits = defineEmits<{(e:'click:detail', value:number):void }>();
@@ -32,6 +32,7 @@ import {computed, defineEmits, defineProps, ref} from "vue";
 </script>
 
 <template>
+
   <tr class="row">
     <td class="serial">{{ serial }}</td>
     <td class="title">{{ props.product.title }}</td>
@@ -48,7 +49,7 @@ import {computed, defineEmits, defineProps, ref} from "vue";
   </tr>
 
   <tr v-if="props.detailsShowing">
-    <td colspan="5">
+    <td colspan="5" class="bg-gray-100">
       <slot name="detail" :id="props.product.id"></slot>
     </td>
   </tr>
@@ -56,8 +57,16 @@ import {computed, defineEmits, defineProps, ref} from "vue";
 </template>
 
 <style scoped>
+  .row {
+    @apply  text-gray-800
+  }
+
   .price, .rating, .serial {
     @apply text-center
+  }
+
+  .action {
+    @apply sticky right-0 bg-gray-50
   }
 
 </style>

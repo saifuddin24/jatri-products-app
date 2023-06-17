@@ -80,8 +80,9 @@ watch(  props.filters, () => {
 
 <template>
 
-   <table class="product-table">
-    <thead>
+  <div class="w-full block overflow-scroll">
+    <table class="product-table">
+      <thead>
       <tr>
         <td>Sl</td>
         <td>Name {{sortKey}} {{sortType}}</td>
@@ -100,28 +101,30 @@ watch(  props.filters, () => {
           Price
         </TableSortableColumn>
 
-        <td>Action</td>
+        <td class="sticky right-0">Action</td>
       </tr>
-    </thead>
+      </thead>
 
-    <tbody>
+      <tbody>
 
-      <products-table-row
-          v-for="(product,index) in getPaginatedProducts"
-          :page="page"
-          :per-page="items_per_page"
-          :product="product"
-          :key="product.id"
-          :serial="index+1"
-          :details-showing="getProductDetails(product.id)?.showing"
-          @click:detail="loadSingleProduct(product.id)"
-      >
-        <template #detail v-if="getProductDetails(product.id)?.showing">
-          <product-details :product="getProductDetails(product.id)"></product-details>
-        </template>
-      </products-table-row>
-    </tbody>
-  </table>
+        <products-table-row
+            v-for="(product,index) in getPaginatedProducts"
+            :page="page"
+            :per-page="items_per_page"
+            :product="product"
+            :key="product.id"
+            :serial="index+1"
+            :details-showing="getProductDetails(product.id)?.showing"
+            @click:detail="loadSingleProduct(product.id)"
+        >
+          <template #detail v-if="getProductDetails(product.id)?.showing">
+            <product-details :product="getProductDetails(product.id)"></product-details>
+          </template>
+        </products-table-row>
+      </tbody>
+    </table>
+
+  </div>
 
   <pagination v-model="page"
               v-model:items-per-page="items_per_page"
@@ -168,7 +171,7 @@ watch(  props.filters, () => {
   }
 
   .pagination {
-    @apply flex flex-col md:flex-row items-center justify-between mt-1
+    @apply flex flex-col md:flex-row items-center justify-between mt-3
   }
 
 </style>

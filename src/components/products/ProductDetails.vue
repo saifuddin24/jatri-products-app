@@ -45,6 +45,6 @@
 
 <style scoped>
   .product-details {
-    @apply border p-4 rounded-3xl shadow
+    @apply border p-4 rounded-3xl shadow bg-gray-50
   }
 </style>
